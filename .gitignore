@@ -1,0 +1,14 @@
+# The site itself has no dependencies. This is only for the check tools, which
+# want puppeteer-core installed somewhere.
+node_modules/
+package-lock.json
+
+.netlify/
+.DS_Store
+Thumbs.db
+
+# Not part of the site
+design-doc/
+LAUNCH-CHECKLIST.md
+apfel-grotezk-main.zip
+.claude/settings.local.json

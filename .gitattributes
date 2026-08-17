@@ -1,0 +1,10 @@
+# Normalise to LF in the repository and on checkout, so the files that end up
+# on a Linux web server are byte-identical to what is committed here.
+* text=auto eol=lf
+
+*.woff2 binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.avif   binary
+*.ico    binary

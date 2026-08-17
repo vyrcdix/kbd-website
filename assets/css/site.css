@@ -1,0 +1,1176 @@
+/* =============================================================================
+   Kristina Dixon Counselling
+   Territory 2, "Big Feelings". Hand-built static CSS. No framework, no build.
+
+   Non-negotiables encoded here, from design-handback-type-and-colour.md:
+   - No gradients. Anywhere. Section separation is a hard colour change,
+     a 1px rule, or space.
+   - No box-shadows. Anywhere.
+   - border-radius: 999px on buttons only. Everything else is square.
+   - All text is charcoal (or warm white on charcoal). Yellow, sky and coral
+     are block and shape colours only and never carry text.
+   - Hierarchy is size and space. Never a weight jump. Display face is 400 only.
+   ========================================================================== */
+
+/* 1. Fonts — self-hosted, latin subsets, font-display:swap
+   ------------------------------------------------------------------------- */
+
+/* Body face. Instrument Sans ships variable, so one file covers 400 and 500. */
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../fonts/instrument-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../fonts/instrument-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/instrument-sans-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Display face — Apfel Grotezk (Collletttivo), the handoff's first choice.
+   SIL Open Font License 1.1; the licence travels with the file, in
+   assets/fonts/ApfelGrotezk-OFL.txt.
+
+   Weight 400 only, deliberately. The family also ships Fett, Satt and Brukt;
+   none of them is here, so nothing can accidentally reach for a heavier cut
+   and reintroduce the weight-jump hierarchy the handback ruled out. */
+@font-face {
+  font-family: 'Apfel Grotezk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/apfel-grotezk-regular.woff2') format('woff2');
+}
+
+/* 2. Tokens
+   ------------------------------------------------------------------------- */
+
+:root {
+  --warm-white: #FBF7F0;
+  --charcoal: #33302B;
+  --yellow: #F2C879;
+  --sky: #8FB0C4;
+  --coral: #E39684;
+  --link: #3A6480;
+  --link-hover: #2A4B60;
+  --placeholder-ground: #E8E2D6;
+
+  /* Softened charcoal for running prose. 7.7:1 on warm white. */
+  --ink-soft: rgba(51, 48, 43, .86);
+  --ink-quiet: rgba(51, 48, 43, .78);
+  --ink-faint: rgba(51, 48, 43, .72);
+
+  --rule: rgba(51, 48, 43, .18);
+  --rule-mid: rgba(51, 48, 43, .2);
+  --rule-strong: rgba(51, 48, 43, .24);
+
+  /* Reversed, for the charcoal closer and the supervision sub-brand. */
+  --paper-soft: rgba(251, 247, 240, .88);
+  --paper-quiet: rgba(251, 247, 240, .8);
+  --paper-rule: rgba(251, 247, 240, .2);
+
+  --font-display: 'Apfel Grotezk', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --page: 1280px;
+  --gutter: clamp(20px, 4.4vw, 56px);
+  --section-pad: clamp(56px, 6.2vw, 80px);
+
+  --ease: cubic-bezier(.2, .6, .35, 1);
+}
+
+/* 3. Base
+   ------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--warm-white);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-size: 17.5px;
+  line-height: 1.58;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+ul { padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+
+a { color: var(--link); text-underline-offset: .18em; }
+a:hover { color: var(--link-hover); }
+
+/* On a colour block the link is charcoal and carries an underline, because
+   the affordance must not be colour alone and #3A6480 measures 4.02:1 on
+   yellow and 2.74:1 on sky — both short of AA. Charcoal is 9.4:1 and 5.7:1. */
+.block--yellow a,
+.block--sky a {
+  color: var(--charcoal);
+  text-decoration: underline;
+}
+.block--yellow a:hover,
+.block--sky a:hover { color: var(--charcoal); text-decoration-thickness: 2px; }
+
+/* Focus is never removed. 2px at 2px offset, always ≥3:1 on its own ground. */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+.block--sky :focus-visible { outline-color: var(--charcoal); }
+.on-charcoal :focus-visible,
+.closer :focus-visible,
+.pro :focus-visible { outline-color: var(--sky); }
+
+[hidden] { display: none !important; }
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+::selection { background: var(--yellow); color: var(--charcoal); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px; top: -100px;
+  z-index: 100;
+  padding: 14px 20px;
+  background: var(--charcoal);
+  color: var(--warm-white);
+  font-size: 15px;
+  text-decoration: none;
+  transition: top .15s var(--ease);
+}
+.skip-link:focus {
+  top: 12px;
+  color: var(--warm-white);
+}
+
+/* 4. Type scale — display 53 / 47 / 43 / 38 / 33 / 23 / 21, weight 400 only
+   ------------------------------------------------------------------------- */
+
+.d {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -.016em;
+  line-height: 1.14;
+}
+.d-53 { font-size: clamp(30px, 4.15vw, 53px); line-height: 1.1;  letter-spacing: -.019em; }
+.d-47 { font-size: clamp(29px, 3.7vw, 47px);  line-height: 1.1;  letter-spacing: -.019em; }
+.d-43 { font-size: clamp(28px, 3.4vw, 43px);  line-height: 1.1;  letter-spacing: -.019em; }
+.d-38 { font-size: clamp(25px, 3vw, 38px);    line-height: 1.12; letter-spacing: -.018em; }
+.d-33 { font-size: clamp(23px, 2.6vw, 33px);  line-height: 1.14; letter-spacing: -.016em; }
+.d-23 { font-size: clamp(20px, 1.8vw, 23px);  line-height: 1.18; letter-spacing: -.014em; }
+.d-21 { font-size: clamp(19px, 1.65vw, 21px); line-height: 1.18; letter-spacing: -.014em; }
+
+/* Space above a heading is generous, space below it is tight. The space is
+   what separates; there is never a weight jump. */
+.lede {
+  font-size: clamp(16.5px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 38em;
+  text-wrap: pretty;
+}
+.lede--short { max-width: 32em; }
+
+/* Contact details, and the land acknowledgement that closes the Contact page. */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  font-size: 17px;
+  color: var(--charcoal);
+}
+.land {
+  max-width: 44em;
+  font-size: 17.5px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  text-wrap: pretty;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 38em;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.prose p { text-wrap: pretty; }
+.prose--loose { gap: 19px; }
+
+/* The single crayon shape that sits in an aside column, in normal flow rather
+   than cropped off an edge. */
+.aside-shape { margin-top: 28px; }
+
+.note {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink-quiet);
+}
+
+/* Small labels, captions and credential lines are the body face at small size
+   with slightly wider tracking. There is no third family. */
+.meta {
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: .005em;
+  color: var(--ink-quiet);
+}
+
+.balance { text-wrap: balance; }
+
+/* Vertical rhythm lives in sibling selectors rather than in the markup, so
+   the rule "generous space above a heading, tight space below it" is stated
+   once and holds on every page. */
+.hero__title + .prose { margin-top: 26px; }
+h1 + .lede { margin-top: 24px; }
+h2 + .prose,
+h2 + .pro-prose { margin-top: 20px; }
+h2 + .rule-list,
+h2 + .defs,
+h2 + .rule-stack,
+.lede + .rule-list { margin-top: 26px; }
+h2 + .trio,
+h2 + .quad { margin-top: 28px; }
+.prose + .cta-row,
+.lede + .cta-row { margin-top: 34px; }
+.rule-list + .block__coda { margin-top: 24px; }
+.defs + .strip { margin-top: 26px; }
+
+.block__coda {
+  max-width: 46em;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.list-narrow { max-width: 60em; }
+.measure-31 { max-width: 31em; }
+.measure-34 { max-width: 34em; }
+.measure-36 { max-width: 36em; }
+
+/* A single following line — "Read more about Kristina", the verification
+   sentence — set at the small body size. */
+.after {
+  margin-top: 22px;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+/* One rule, one line: the AutPlay / Circle of Security strip under the
+   credential grid. The disclosure control sits on the line below it, so that
+   opening it expands into full width instead of into a narrow column. */
+.strip {
+  padding-top: 22px;
+  border-top: 1px solid var(--rule-strong);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.strip + .disclosure { margin-top: 22px; }
+.disclosure + .after { margin-top: 20px; }
+
+/* 5. Layout
+   ------------------------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+  overflow: hidden; /* shapes crop against this */
+}
+.section--tight-top { padding-block-start: 0; }
+.section--tight-bottom { padding-block-end: 0; }
+
+/* One colour block per section. Never two colour blocks adjacent. */
+.block--yellow { background: var(--yellow); }
+.block--sky { background: var(--sky); }
+.block--charcoal { background: var(--charcoal); color: var(--warm-white); }
+
+/* Text on a colour block is full-strength charcoal, never the softened value. */
+.block--yellow .prose,
+.block--sky .prose,
+.block--yellow .lede,
+.block--sky .lede { color: var(--charcoal); }
+
+.grid { display: grid; }
+
+/* Every split is a grid in its own right, so a modifier can be used alone. */
+.split,
+.split--even,
+.split--flip,
+.split--aside {
+  display: grid;
+  gap: 64px;
+  align-items: start;
+}
+.split { grid-template-columns: 1.1fr .9fr; }
+.split--even { grid-template-columns: 1fr 1fr; gap: 56px; }
+.split--flip { grid-template-columns: .9fr 1.1fr; gap: 56px; }
+.split--aside { grid-template-columns: .36fr .64fr; gap: 56px; }
+.split--middle { align-items: center; }
+
+/* 6. Header
+   ------------------------------------------------------------------------- */
+
+.site-header {
+  position: relative;
+  border-bottom: 1px solid rgba(51, 48, 43, .14);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 26px;
+}
+
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.lockup__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18.5px;
+  letter-spacing: -.016em;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__link {
+  font-size: 15px;
+  color: rgba(51, 48, 43, .8);
+  text-decoration: none;
+}
+.nav__link:hover { color: var(--charcoal); text-decoration: underline; }
+.nav__link[aria-current='page'] { color: var(--charcoal); }
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* The mobile menu is a native <details>, so it needs no script and keeps its
+   keyboard and screen-reader behaviour for free. */
+.menu { display: none; }
+
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  min-height: 54px;
+  font-size: 16px;
+  color: rgba(51, 48, 43, .8);
+  cursor: pointer;
+  list-style: none;
+}
+.menu-toggle::-webkit-details-marker { display: none; }
+
+/* A plain sheet under the header. Not a drawer, not an overlay. */
+.menu-sheet {
+  position: absolute;
+  left: 0; right: 0;
+  top: 100%;
+  z-index: 25;
+  background: var(--warm-white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.menu-sheet__list { display: flex; flex-direction: column; }
+.menu-sheet__list a {
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  padding-block: 4px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 17px;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.menu-sheet__list a:last-child { border-bottom: 0; }
+
+/* 7. Buttons and plain links
+   ------------------------------------------------------------------------- */
+
+/* The pill is the one rounded thing on the site, and it belongs to buttons. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .16s var(--ease), color .16s var(--ease),
+              border-color .16s var(--ease), transform .16s var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary {
+  padding: 16px 30px;
+  background: var(--charcoal);
+  color: var(--warm-white);
+}
+.btn--primary:hover { background: #26241F; color: var(--warm-white); }
+
+.btn--yellow {
+  padding: 17px 32px;
+  background: var(--yellow);
+  color: var(--charcoal);
+}
+.btn--yellow:hover { background: #E9B95F; color: var(--charcoal); }
+
+.btn--header {
+  padding: 12px 22px;
+  background: var(--charcoal);
+  color: var(--warm-white);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.btn--header:hover { background: #26241F; color: var(--warm-white); }
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.cta-row__reassurance {
+  font-size: 15.5px;
+  color: var(--ink-faint);
+}
+
+/* 8. Hero
+   ------------------------------------------------------------------------- */
+
+.hero { padding-block-start: clamp(40px, 5.6vw, 84px); }
+
+.hero__title { max-width: 19em; }
+.hero__title--wide { max-width: 23em; }
+.hero__title--narrow { max-width: 17em; }
+
+.hero__credential {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(51, 48, 43, .16);
+  max-width: 38em;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(51, 48, 43, .75);
+}
+
+/* 9. Rule lists, trios and cells
+   ------------------------------------------------------------------------- */
+
+/* Two columns of plain lines separated by hairlines. No bullets, no icons. */
+.rule-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 60px;
+}
+.rule-list > li,
+.rule-list > p {
+  margin: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.block--yellow .rule-list > li,
+.block--sky .rule-list > li { border-bottom-color: var(--rule-strong); }
+
+/* Stacked variant: a single column of beliefs or practical lines. */
+.rule-stack {
+  display: flex;
+  flex-direction: column;
+  max-width: 38em;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.rule-stack > li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  text-wrap: pretty;
+}
+.rule-stack > li:first-child { padding-top: 0; }
+.rule-stack > li:last-child { padding-bottom: 0; border-bottom: 0; }
+
+/* A definition list: a display-face term over its plain-language translation.
+   Used for the credentials, the four services, and the funding levers. */
+.defs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 60px;
+  margin: 0;
+}
+.defs > div {
+  padding: 22px 0;
+  border-top: 1px solid var(--rule-strong);
+}
+.defs dt { margin: 0; }
+.defs dd {
+  margin: 8px 0 0;
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+/* Three cells divided by vertical rules. No cards, no shadows. */
+.trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule-mid);
+}
+.trio > * {
+  padding: 26px 40px 0 40px;
+  border-right: 1px solid var(--rule-mid);
+}
+.trio > *:first-child { padding-left: 0; }
+.trio > *:last-child { padding-right: 0; border-right: 0; }
+
+.quad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--paper-rule);
+}
+.quad > * {
+  padding: 26px 32px 0 32px;
+  border-right: 1px solid var(--paper-rule);
+}
+.quad > *:first-child { padding-left: 0; }
+.quad > *:last-child { padding-right: 0; border-right: 0; }
+
+.cell__body {
+  margin-top: 8px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.cell__body:first-child { margin-top: 0; }
+/* Fixed height across the trio so the three titles sit on one line, whatever
+   the shape's own proportions. */
+.cell__shape {
+  height: 42px;
+  width: auto;
+  margin-bottom: 14px;
+}
+
+/* Home: figure and unit share a line. */
+.price + .price { margin-top: 8px; }
+.price__unit { font-size: 16px; color: var(--ink-faint); }
+
+/* Fees: a large figure with its unit on the line below. */
+.price-cell__unit {
+  margin-top: 6px;
+  font-size: 16.5px;
+  color: var(--ink-quiet);
+}
+
+/* 10. Photography
+   -------------------------------------------------------------------------
+   PLACEHOLDER — every one of these must be replaced with real photography and
+   real alt text before launch. See PHOTOGRAPHY.md for the shot list and the
+   two-line swap. Do not ship the striped fill. Do not substitute stock. */
+
+.photo {
+  position: relative;
+  display: block;
+  background: var(--placeholder-ground);
+  overflow: hidden;
+}
+.photo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo--4x5 { aspect-ratio: 4 / 5; }
+.photo--3x2 { aspect-ratio: 3 / 2; }
+.photo--16x9 { aspect-ratio: 16 / 9; }
+
+/* A portrait that shares a section with body copy rather than carrying a hero:
+   held to a width that keeps the section from becoming one tall photograph. */
+.photo--inset { max-width: 420px; }
+
+.photo__stripes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.photo__caption {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  max-width: calc(100% - 40px);
+  padding: 8px 11px;
+  background: rgba(251, 247, 240, .94);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(51, 48, 43, .8);
+}
+.block--sky .photo { background: var(--warm-white); }
+
+/* 11. Feeling shapes
+   -------------------------------------------------------------------------
+   A closed set of six, all built from the five authored crayon paths. Flat,
+   hard-edged, no gradients, no shadows; each prints in one colour.
+
+   Placement rule, and this one was a real defect caught in review: a shape
+   crops off the edge of its section and NEVER sits behind text or over an
+   interactive control. Every placement below is checked against the rendered
+   text and control rects by tools/check-shapes.mjs — run it after any change
+   to a section's copy or width. */
+
+.shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.section > .wrap { position: relative; z-index: 1; }
+
+/* Home — yellow recognition block. "Big feeling", cropped off the top-right,
+   sitting above the rule list and clear of the heading. */
+.shape--recognition { top: -252px; right: -84px; width: 360px; height: 360px; }
+
+/* Home — sky "Hi, I'm Kristina". "Settled", cropped off the bottom-left,
+   below the portrait column. */
+.shape--kristina { bottom: -196px; left: -92px; width: 300px; height: 300px; }
+
+/* About — yellow "What the letters mean". "Together", cropped off the top-right
+   in the band above the definition grid. */
+.shape--letters { top: -150px; right: -170px; width: 330px; height: 217px; }
+
+/* About — sky "Where we'd meet". "Working on it", cropped off the bottom-left. */
+.shape--meet { bottom: -168px; left: -70px; width: 240px; height: 240px; }
+
+/* For your child — yellow "It's quieter than it looks". "Not sure yet",
+   cropped off the bottom-left, below the aside heading. */
+.shape--quieter { bottom: -196px; left: -136px; width: 320px; height: 320px; }
+
+/* For you — sky "You won't be handed a programme". "Big feeling", filled,
+   cropped off the bottom-right beyond the 31em copy column. */
+.shape--programme { bottom: -178px; right: -86px; width: 300px; height: 300px; }
+
+/* Fees — sky funding block. "Big feeling", cropped off the top-left above the
+   heading baseline. */
+.shape--funding { top: -212px; left: -76px; width: 300px; height: 300px; }
+
+/* Contact — yellow form panel. "Settled", cropped off the top-right corner,
+   entirely above the first control. */
+.shape--form { top: -142px; right: -66px; width: 200px; height: 200px; }
+
+/* Every closer — "Not sure yet", dashed, cropped off the bottom-right. */
+.shape--closer { bottom: -190px; right: -60px; width: 280px; height: 280px; }
+
+/* 12. Disclosure
+   ------------------------------------------------------------------------- */
+
+.disclosure { margin: 0; }
+.disclosure__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 13px 24px;
+  border: 1px solid rgba(51, 48, 43, .5);
+  font-size: 15px;
+  color: var(--charcoal);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color .16s var(--ease);
+}
+.disclosure__summary::-webkit-details-marker { display: none; }
+.disclosure__summary:hover { background: rgba(51, 48, 43, .06); }
+.disclosure__chev {
+  flex: none;
+  transition: transform .22s var(--ease);
+}
+.disclosure[open] .disclosure__chev { transform: rotate(180deg); }
+.disclosure__body {
+  padding-top: 20px;
+  max-width: 42em;
+  font-size: 16.5px;
+  line-height: 1.65;
+}
+.disclosure__body p + p { margin-top: 14px; }
+
+/* Height animates with an ease-out where the browser supports it. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .disclosure::details-content {
+    block-size: 0;
+    overflow: hidden;
+    content-visibility: hidden;
+    transition: block-size .28s var(--ease),
+                content-visibility .28s var(--ease) allow-discrete;
+  }
+  .disclosure[open]::details-content {
+    block-size: auto;
+    content-visibility: visible;
+  }
+}
+
+/* 13. Message form
+   -------------------------------------------------------------------------
+   Three fields, one of them required. Nothing about funding, diagnosis or
+   history is asked before first contact. */
+
+.form-panel {
+  position: relative;
+  padding: 36px 36px 32px;
+  background: var(--yellow);
+  overflow: hidden;
+}
+/* Everything except the shape paints above it. The shape keeps its own
+   absolute positioning, so it must not be caught by this. */
+.form-panel > :not(.shape) { position: relative; z-index: 1; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-panel h2 + .form { margin-top: 20px; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field__label {
+  font-size: 14.5px;
+  color: var(--charcoal);
+}
+.field__control {
+  min-height: 54px;
+  padding: 14px 15px;
+  background: var(--warm-white);
+  border: 1px solid rgba(51, 48, 43, .3);
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 16.5px;
+  line-height: 1.5;
+  color: var(--charcoal);
+}
+textarea.field__control {
+  min-height: 112px;
+  resize: vertical;
+}
+.field__control:hover { border-color: rgba(51, 48, 43, .5); }
+.field__control[aria-invalid='true'] { border-color: var(--charcoal); border-width: 2px; }
+
+/* Errors are text beside the field, never colour alone. */
+.field__error {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--charcoal);
+}
+.field__error:empty { display: none; }
+
+.form__submit {
+  min-height: 54px;
+  padding: 15px 32px;
+  background: var(--charcoal);
+  color: var(--warm-white);
+  border: 0;
+  border-radius: 999px;
+  font-size: 16px;
+  transition: background-color .16s var(--ease), transform .16s var(--ease);
+}
+.form__submit:hover { background: #26241F; transform: translateY(-1px); }
+.form__submit:active { transform: translateY(0); }
+
+.form__helper {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--charcoal);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* 14. Closing block
+   ------------------------------------------------------------------------- */
+
+.closer {
+  position: relative;
+  padding-block: clamp(58px, 6.4vw, 84px);
+  background: var(--charcoal);
+  color: var(--warm-white);
+  overflow: hidden;
+}
+.closer__title { max-width: 20em; }
+.closer__body {
+  margin-top: 20px;
+  max-width: 34em;
+  line-height: 1.6;
+  color: var(--paper-soft);
+  text-wrap: pretty;
+}
+.closer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+/* 15. Footer
+   ------------------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: 46px 54px;
+  border-top: 1px solid rgba(51, 48, 43, .16);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-quiet);
+}
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 44px;
+}
+.footer-col { display: flex; flex-direction: column; gap: 7px; }
+.footer-col__head { color: var(--charcoal); }
+.footer-col a { color: var(--link); }
+.footer-col a:hover { color: var(--link-hover); }
+.footer-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 5px;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.footer-lockup__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 16.5px;
+  letter-spacing: -.016em;
+}
+
+/* 16. Sticky message CTA — mobile only, and it is the CTA, not the nav
+   ------------------------------------------------------------------------- */
+
+.sticky-cta { display: none; }
+
+/* 17. Supervision sub-brand
+   -------------------------------------------------------------------------
+   Same mark, same type, inverted palette. Charcoal ground, warm-white text,
+   dusty sky as the single accent. No yellow, no coral, no feeling shapes,
+   no photography of children. Denser type, tighter spacing. */
+
+.pro {
+  background: var(--charcoal);
+  color: var(--warm-white);
+}
+.pro a { color: var(--sky); }
+.pro a:hover { color: #A9C3D4; }
+
+.pro-header { border-bottom: 1px solid rgba(251, 247, 240, .18); }
+.pro-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 26px;
+}
+.pro-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--warm-white);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17.5px;
+  letter-spacing: -.016em;
+  white-space: nowrap;
+}
+.pro-lockup:hover { color: var(--warm-white); }
+.pro-lockup__suffix { color: rgba(251, 247, 240, .6); }
+
+.pro-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 14.5px;
+}
+.pro-nav a {
+  color: rgba(251, 247, 240, .78);
+  text-decoration: none;
+}
+.pro-nav a:hover { color: var(--warm-white); text-decoration: underline; }
+
+/* Square, not a pill: the sub-brand does not borrow the parent-side control. */
+.pro-enquire {
+  padding: 11px 21px;
+  border: 1px solid rgba(143, 176, 196, .65);
+  color: var(--sky);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color .16s var(--ease), border-color .16s var(--ease);
+}
+.pro-enquire:hover { background: rgba(143, 176, 196, .12); border-color: var(--sky); }
+
+.pro-section { padding-block: clamp(44px, 4.6vw, 64px); }
+.pro-section--tight-top { padding-block-start: 0; }
+.pro-section--tight-bottom { padding-block-end: 0; }
+.split--pro {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 52px;
+  align-items: start;
+}
+
+.pro-panel {
+  padding: 30px 32px;
+  border: 1px solid rgba(251, 247, 240, .22);
+}
+.pro-prose {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--paper-soft);
+  text-wrap: pretty;
+}
+h1 + .pro-prose { margin-top: 22px; }
+.pro-panel .d + .pro-prose { margin-top: 12px; }
+.pro-cell__body {
+  margin-top: 8px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--paper-quiet);
+}
+.pro-rule-stack {
+  display: flex;
+  flex-direction: column;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--paper-soft);
+}
+.pro-rule-stack > li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--paper-rule);
+  text-wrap: pretty;
+}
+.pro-rule-stack > li:first-child { padding-top: 0; }
+.pro-rule-stack > li:last-child { padding-bottom: 0; border-bottom: 0; }
+
+.pro-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 34px 36px;
+  border: 1px solid rgba(251, 247, 240, .22);
+}
+.pro .pro-cta__btn {
+  flex: none;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 30px;
+  background: var(--sky);
+  color: #26241F;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color .16s var(--ease);
+}
+.pro .pro-cta__btn:hover { background: #A9C3D4; color: #26241F; }
+.pro-footnote {
+  margin-top: 22px;
+  font-size: 14.5px;
+  color: rgba(251, 247, 240, .6);
+}
+
+/* 18. Motion — feedback, not atmosphere
+   -------------------------------------------------------------------------
+   One quiet entrance, on the hero only. Nothing else moves on its own. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__enter {
+    animation: enter .5s var(--ease) both;
+  }
+}
+@keyframes enter {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .btn:hover, .form__submit:hover { transform: none; }
+}
+
+/* 19. Responsive — single column below roughly 900px.
+       Words before pictures: the headline and the recognition list come
+       before any photograph.
+   ------------------------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .split, .split--flip { grid-template-columns: 1fr 1fr; gap: 44px; }
+  .split--aside { grid-template-columns: .4fr .6fr; gap: 40px; }
+  .rule-list, .defs { gap: 0 40px; }
+  .trio > * { padding-inline: 28px; }
+  .quad > * { padding-inline: 24px; }
+}
+
+@media (max-width: 900px) {
+  body { font-size: 16.5px; }
+
+  .split, .split--even, .split--flip, .split--aside, .split--pro {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .split--photo-first > .photo-cell { order: 2; }
+
+  .rule-list, .defs { grid-template-columns: 1fr; gap: 0; }
+  .defs > div { padding: 20px 0; }
+
+  .trio, .quad { grid-template-columns: 1fr; }
+  .trio > *, .quad > * {
+    padding: 22px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule-mid);
+  }
+  .trio > *:last-child, .quad > *:last-child { border-bottom: 0; padding-bottom: 0; }
+  .quad > * { border-bottom-color: var(--paper-rule); }
+
+  .nav, .header__actions .btn--header, .header__actions .nav__link { display: none; }
+  .menu { display: block; }
+  .site-header__inner { padding-block: 14px; }
+
+  .hero { padding-block-start: 30px; }
+  .hero__credential { margin-top: 32px; }
+
+  .rule-list > li, .rule-list > p { font-size: 16.5px; padding: 12px 0; }
+  .rule-stack > li { padding: 16px 0; }
+
+  .form-panel { padding: 26px 20px 28px; }
+
+  .btn { min-height: 54px; }
+  .cta-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .cta-row .btn { width: 100%; }
+  .cta-row__reassurance { text-align: center; }
+  .closer__actions { flex-direction: column; align-items: stretch; }
+  .closer__actions .btn { width: 100%; }
+
+  .site-footer__inner { grid-template-columns: 1fr; gap: 30px; }
+  .footer-col a { display: inline-block; min-height: 34px; }
+
+  .pro-header__inner { flex-wrap: wrap; gap: 14px; padding-block: 16px; }
+  .pro-nav { flex-wrap: wrap; gap: 18px; }
+  .pro-cta { flex-direction: column; align-items: stretch; }
+  .pro-cta__btn { justify-content: center; }
+
+  /* Shapes are re-placed for the single column: still cropped off an edge,
+     still clear of every text and control rect. */
+  .shape--recognition { top: -118px; right: -74px; width: 170px; height: 170px; }
+  .shape--kristina { bottom: -110px; left: -60px; width: 160px; height: 160px; }
+  .shape--letters { top: -96px; right: -110px; width: 190px; height: 125px; }
+  .shape--meet { bottom: -108px; left: -56px; width: 155px; height: 155px; }
+  .shape--quieter { bottom: -112px; left: -80px; width: 175px; height: 175px; }
+  .shape--programme { bottom: -114px; right: -62px; width: 170px; height: 170px; }
+  .shape--funding { top: -120px; left: -60px; width: 170px; height: 170px; }
+  .shape--form { top: -104px; right: -54px; width: 145px; height: 145px; }
+  .shape--closer { bottom: -112px; right: -50px; width: 165px; height: 165px; }
+
+  /* Sticky element on mobile is the message CTA, not the nav. */
+  .has-sticky-cta { padding-bottom: 84px; }
+  .sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 30;
+    display: block;
+    padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+    background: var(--warm-white);
+    border-top: 1px solid var(--rule);
+  }
+  .sticky-cta .btn { width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .photo__caption { left: 12px; bottom: 12px; font-size: 10px; padding: 6px 9px; }
+  .trio > * { padding-inline: 0; }
+
+  .lockup { gap: 10px; }
+  .lockup__name { font-size: 16px; }
+  .site-header .mark { width: 38px; height: 25px; }
+}
+
+/* On the narrowest phones the wordmark shortens to "Kristina Dixon", as the
+   mobile design shows. The link's aria-label still carries the full name. */
+@media (max-width: 420px) {
+  .lockup__tail { display: none; }
+}
+
+/* 20. Print — the shapes and the mark survive one colour on paper
+   ------------------------------------------------------------------------- */
+
+@media print {
+  .sticky-cta, .menu-toggle, .menu-sheet, .skip-link { display: none !important; }
+  body { font-size: 11pt; background: #fff; }
+  .shape { display: none; }
+  a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 9pt; }
+}

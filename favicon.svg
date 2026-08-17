@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 25" width="40" height="25" role="img" aria-label="Kristina Dixon Counselling">
+  <!-- Below 28px the doubled crayon line is dropped and the mark holds as two
+       plain circles: a child and an adult in the same space, neither contained
+       by the other. One colour, charcoal on warm white. -->
+  <rect width="40" height="25" fill="#FBF7F0"/>
+  <g fill="none" stroke="#33302B" stroke-width="3" stroke-linecap="round">
+    <circle cx="14" cy="12.5" r="9.4"/>
+    <circle cx="26" cy="12.5" r="9.4"/>
+  </g>
+</svg>

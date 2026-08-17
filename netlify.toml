@@ -1,0 +1,49 @@
+# Kristina Dixon Counselling — static site, no build step.
+# Netlify publishes the repository root as-is and handles the contact form.
+
+[build]
+  publish = "."
+  command = ""
+
+# The message form posts to Netlify Forms and redirects to /thanks.html.
+# Nothing here needs a function, an API key, or a third-party modal.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=()"
+    # Everything the site loads is same-origin — one stylesheet, two small
+    # scripts, self-hosted woff2, inline SVG — except GA4. There is no
+    # 'unsafe-inline' anywhere: the gtag config lives in assets/js/analytics.js
+    # rather than in an inline <script>, which is what keeps this strict.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; font-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# The old Wix site was a single page. Anything that still points at it lands
+# on the home page rather than a 404.
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index.php"
+  to = "/"
+  status = 301
