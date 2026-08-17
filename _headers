@@ -1,0 +1,22 @@
+# Cloudflare Pages response headers.
+# Replaces the [[headers]] blocks that were in netlify.toml.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+  # Everything the site loads is same-origin — one stylesheet, two small
+  # scripts, self-hosted woff2, inline SVG — except GA4. There is no
+  # 'unsafe-inline' anywhere: the gtag config lives in assets/js/analytics.js
+  # rather than in an inline <script>, which is what keeps this strict.
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; font-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=604800
+
+/assets/js/*
+  Cache-Control: public, max-age=604800

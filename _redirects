@@ -1,0 +1,4 @@
+# The old Wix site was a single page. Anything that still points at it lands on
+# the home page rather than a 404.
+/home    /  301
+/index.php  /  301

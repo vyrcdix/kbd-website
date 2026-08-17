@@ -206,6 +206,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   text-wrap: pretty;
 }
 .lede--short { max-width: 32em; }
+.lede + .lede { margin-top: 16px; }
 
 /* Contact details, and the land acknowledgement that closes the Contact page. */
 .contact-details {
@@ -836,6 +837,17 @@ textarea.field__control {
   line-height: 1.55;
   color: var(--charcoal);
 }
+
+/* A send that failed. Charcoal on yellow at 9.4:1, and it appears above the
+   helper line rather than replacing it, so nothing a person typed moves. */
+.form__error {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--charcoal);
+  border-left: 2px solid var(--charcoal);
+  padding-left: 13px;
+}
+.form__error:empty { display: none; }
 
 .honeypot {
   position: absolute;

@@ -33,9 +33,13 @@ assets/js/site.js        Form validation. Loaded only by contact.html
 assets/js/analytics.js   GA4 config and conversion events
 assets/fonts/*.woff2     Self-hosted: Apfel Grotezk 400, Instrument Sans 400/500
 assets/img/              Photography goes here — see PHOTOGRAPHY.md
+functions/api/contact.js Cloudflare Pages Function: the message form
+message-not-sent.html    Shown if a send fails, with the direct email address
 tools/check-shapes.mjs   Feeling-shape placement check
 tools/check-contrast.mjs WCAG contrast check on rendered text
-netlify.toml             Publish config, headers, redirects
+tools/contact.test.mjs   Tests the form Function against a stubbed Fastmail
+_headers                 Security headers and cache policy
+_redirects               Old Wix paths
 ```
 
 There is deliberately no templating. The header and footer are repeated in each
@@ -97,7 +101,7 @@ subsets.
 
 GA4, measurement ID `G-G0EFPKYL7X`. The gtag config lives in
 `assets/js/analytics.js` rather than an inline `<script>`, which is what lets
-the CSP in `netlify.toml` stay strict — there is no `'unsafe-inline'` anywhere.
+the CSP in `_headers` stay strict — there is no `'unsafe-inline'` anywhere.
 
 Three conversions, per the brief: `generate_lead` (fired by `thanks.html` via
 `data-ga-event`), `phone_tap`, and `email_tap`. One delegated click listener
@@ -105,11 +109,42 @@ handles the last two, so a page that gains a phone number needs no rewiring.
 
 ## Contact form
 
-Netlify Forms. `contact.html` posts to `/thanks.html`; the honeypot is
-`bot-field`. No third-party modal, no serverless function, no API key. One
-field is required — a way to reply — and the error is rendered as text beside
-the field by `assets/js/site.js`. With JavaScript off the browser's own
-required-field handling takes over and the form still submits.
+`contact.html` posts to `/api/contact`, a Cloudflare Pages Function that sends
+through Fastmail's JMAP API. The message path is browser → Cloudflare →
+Fastmail and nothing else: no third-party form service, and nothing is written
+to storage — the Function relays and forgets.
+
+`From` is always an address on the domain so SPF and DKIM pass; the visitor's
+address goes in `Reply-To`. Spoofing them as the sender would fail DMARC, and
+on this site a message filed as spam is a family that did not get an answer.
+
+Three environment variables, set on the Pages project:
+
+| Variable | Value |
+|---|---|
+| `FASTMAIL_API_TOKEN` | API token with mail read/write. **Secret.** |
+| `CONTACT_TO` | Where messages land, e.g. `hello@kristinadixon.ca` |
+| `CONTACT_FROM` | Sending identity, e.g. `forms@kristinadixon.ca` |
+
+It degrades in both directions. Without JavaScript the form posts normally and
+the Function redirects to `/thanks.html` or `/message-not-sent.html`. With
+JavaScript, `assets/js/site.js` submits in the background so that a failure can
+be reported *without* navigating away and discarding what someone just spent
+ten minutes working up the nerve to write.
+
+Spam control is the `bot-field` honeypot only. No CAPTCHA: the brief is
+emphatic about lowering the barrier for a distressed parent, and Turnstile is
+friction. If spam appears, add it then.
+
+```sh
+node tools/contact.test.mjs     # 26 assertions, no dependencies
+```
+
+## Deploying
+
+Cloudflare Pages. Build command empty, output directory the repo root; the
+`functions/` directory is picked up automatically. `_headers` carries the security headers
+and cache policy; `_redirects` carries the old Wix paths.
 
 ## Before this goes live
 

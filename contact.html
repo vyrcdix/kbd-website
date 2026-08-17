@@ -84,8 +84,7 @@
 
         <h2 class="d d-23">Send me a message</h2>
 
-        <form class="form" name="message" method="POST" action="/thanks.html" data-netlify="true" data-netlify-honeypot="bot-field" data-message-form>
-          <input type="hidden" name="form-name" value="message">
+        <form class="form" name="message" method="POST" action="/api/contact" data-message-form>
           <p class="honeypot"><label>Leave this field empty if you are a person: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
           <div class="field">
@@ -105,6 +104,8 @@
           </div>
 
           <button class="form__submit" type="submit">Send</button>
+
+          <p class="form__error" role="alert" data-form-error></p>
 
           <p class="form__helper" id="form-helper">Three fields, one of them required. Nothing about funding, diagnosis, or history is asked before we&rsquo;ve spoken.</p>
         </form>
