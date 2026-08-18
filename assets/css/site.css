@@ -380,9 +380,6 @@ h2 + .quad { margin-top: 28px; }
   letter-spacing: -.019em;
   white-space: nowrap;
 }
-/* The single-ring fallback mark ships in the markup but only shows on the
-   narrowest screens, where the two-ring overlap would muddy. */
-.lockup .mark--small { display: none; }
 
 .nav {
   display: flex;
@@ -1172,12 +1169,20 @@ h1 + .pro-prose { margin-top: 22px; }
   .trio > * { padding-inline: 0; }
 
   /* The mobile header does not stack and does not try to fit the overlapping
-     mark: single ring, "Kristina Dixon" on one line. The link's aria-label
-     still carries the full name. */
+     mark: the single-ring fallback beside "Kristina Dixon" on one line. The
+     fallback is drawn here rather than shipped as a second svg in the markup,
+     because it is an alternative to the two-ring mark, never an addition to
+     it. The link's aria-label still carries the full name. */
   .lockup { gap: 9px; }
   .lockup__name { font-size: 17px; }
   .lockup .mark { display: none; }
-  .lockup .mark--small { display: block; }
+  .lockup::before {
+    content: "";
+    flex: none;
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'><path d='M50 9 Q68.4 5.7 81.8 18.2 Q91.6 32.8 93.5 50 Q95.3 68.8 78.3 78.3 Q66.8 90.7 50 94.5 Q32 93.4 20.3 79.7 Q7.9 67.4 5 50 Q5.2 31.4 20.7 20.7 Q33.1 9.3 53 8.2' fill='none' stroke='%2333302B' stroke-width='7' stroke-linecap='round'/></svg>") center / contain no-repeat;
+  }
   .lockup__tail { display: none; }
 }
 
