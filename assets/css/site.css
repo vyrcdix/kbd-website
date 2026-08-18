@@ -376,7 +376,9 @@ h2 + .quad { margin-top: 28px; }
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 15.5px;
-  line-height: 1.16;
+  /* Absolute leading: the two-line block (33px) must stay shorter than the
+     40px mark, or the lock-up reads as an icon beside a heading. */
+  line-height: 16.5px;
   letter-spacing: -.019em;
   white-space: nowrap;
 }
@@ -914,7 +916,7 @@ textarea.field__control {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 12.5px;
-  line-height: 1.16;
+  line-height: 13.5px;
   letter-spacing: -.019em;
 }
 

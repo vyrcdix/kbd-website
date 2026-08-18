@@ -18,9 +18,11 @@ set, so the logo and the illustration are the same drawing.
 | `avatar.svg` / `avatar-512.png` | Square avatar of the two-ring mark, charcoal on warm white, for Jane and the directories |
 
 The wordmark in the lock-up files is Apfel Grotezk Regular converted to
-outlines (26px against a 76px mark, `line-height 1.16`,
-`letter-spacing -.019em`), so the files need no font installed and are
-print-ready. The face is OFL-licensed; the licence ships in
+outlines (26px against a 76px mark, absolute `line-height 28px`,
+`letter-spacing -.019em`, weight 400 only), so the files need no font
+installed and are print-ready. The leading is absolute because the two-line
+block must never exceed the height of the rings: 56px against the 76px mark
+here, 33px against 40px in the site header, ~27px against 26px in the footer. The face is OFL-licensed; the licence ships in
 `../assets/fonts/ApfelGrotezk-OFL.txt`.
 
 ## Geometry
