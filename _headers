@@ -12,11 +12,25 @@
   # rather than in an inline <script>, which is what keeps this strict.
   Content-Security-Policy: default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; font-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'
 
+# The font files are the only ones safe to freeze: their contents never change,
+# and if a face is ever replaced the new file gets a new name. Nothing else here
+# is content-hashed, so nothing else can be frozen.
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# The stylesheet and scripts are served under fixed names, so a long max-age
+# would strand returning visitors on an old copy until it expired — the HTML
+# revalidates and updates, the CSS does not, and the page renders new markup
+# with old rules. That is not hypothetical: it hid a lock-up colour change that
+# had already shipped.
+#
+# max-age=0 does not mean "do not cache". The browser and the Cloudflare edge
+# both still store the file and revalidate it with an ETag, so an unchanged
+# stylesheet costs a 304 with no body rather than a re-download. The site has no
+# build step and therefore no content hashing, so revalidation is what keeps a
+# deploy honest.
 /assets/css/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/js/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=0, must-revalidate
