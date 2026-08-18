@@ -7,8 +7,9 @@
      a 1px rule, or space.
    - No box-shadows. Anywhere.
    - border-radius: 999px on buttons only. Everything else is square.
-   - All text is charcoal (or warm white on charcoal). Yellow, sky and coral
-     are block and shape colours only and never carry text.
+   - All text is charcoal (or warm white on charcoal). Yellow and sky are block
+     and shape colours only and never carry text. Coral has one exception, the
+     lock-up descriptor, and only in the darkened cut that clears AA.
    - Hierarchy is size and space. Never a weight jump. Display face is 400 only.
    ========================================================================== */
 
@@ -70,7 +71,15 @@
   --charcoal: #33302B;
   --yellow: #F2C879;
   --sky: #8FB0C4;
+
+  /* Coral carries the lock-up descriptor, and the value flips with the ground
+     because no single one clears AA on both. --coral is the palette value and
+     is only ever type on charcoal (5.6:1); --coral-ink is the darkened cut and
+     is only ever type on warm white (4.8:1). Swapped, both fail: #E39684 on
+     warm white measures about 2:1, #A85742 on charcoal about 2.4:1. Yellow is
+     not a third option — it is unusable as type on warm white at any size. */
   --coral: #E39684;
+  --coral-ink: #A85742;
   --link: #3A6480;
   --link-hover: #2A4B60;
   --placeholder-ground: #E8E2D6;
@@ -375,13 +384,16 @@ h2 + .quad { margin-top: 28px; }
 .lockup__name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 15.5px;
-  /* Absolute leading: the two-line block (33px) must stay shorter than the
-     40px mark, or the lock-up reads as an icon beside a heading. */
-  line-height: 16.5px;
+  font-size: 17px;
+  /* Absolute leading: the two-line block (36px) must stay shorter than the
+     46px mark, or the lock-up reads as an icon beside a heading. */
+  line-height: 18px;
   letter-spacing: -.019em;
   white-space: nowrap;
 }
+/* The name reads first, the descriptor second — the same relationship
+   "Supervision" already has in the sub-brand. */
+.lockup__tail { color: var(--coral-ink); }
 
 .nav {
   display: flex;
@@ -902,8 +914,10 @@ textarea.field__control {
 }
 .footer-col { display: flex; flex-direction: column; gap: 7px; }
 .footer-col__head { color: var(--charcoal); }
-.footer-col a { color: var(--link); }
-.footer-col a:hover { color: var(--link-hover); }
+/* The lock-up is excluded: it is the mark, not a link in a list, and the name
+   keeps its own charcoal rather than taking the link blue. */
+.footer-col a:not(.footer-lockup) { color: var(--link); }
+.footer-col a:not(.footer-lockup):hover { color: var(--link-hover); }
 .footer-lockup {
   display: inline-flex;
   align-items: center;
@@ -915,10 +929,12 @@ textarea.field__control {
 .footer-lockup__name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 12.5px;
-  line-height: 13.5px;
+  font-size: 13.5px;
+  line-height: 14.5px;
   letter-spacing: -.019em;
+  white-space: nowrap;
 }
+.footer-lockup__tail { color: var(--coral-ink); }
 
 /* 16. Sticky message CTA — mobile only, and it is the CTA, not the nav
    ------------------------------------------------------------------------- */
@@ -1133,7 +1149,9 @@ h1 + .pro-prose { margin-top: 22px; }
   .closer__actions .btn { width: 100%; }
 
   .site-footer__inner { grid-template-columns: 1fr; gap: 30px; }
-  .footer-col a { display: inline-block; min-height: 34px; }
+  /* Tap targets for the link lists only — the lock-up must stay inline-flex or
+     the mark and the two-line wordmark fall out of alignment. */
+  .footer-col a:not(.footer-lockup) { display: inline-block; min-height: 34px; }
 
   .pro-header__inner { flex-wrap: wrap; gap: 14px; padding-block: 16px; }
   .pro-nav { flex-wrap: wrap; gap: 18px; }
