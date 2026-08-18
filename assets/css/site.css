@@ -368,15 +368,15 @@ h2 + .quad { margin-top: 28px; }
 .lockup {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
+  gap: 15px;
   color: var(--charcoal);
   text-decoration: none;
 }
 .lockup__name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 18.5px;
-  letter-spacing: -.016em;
+  font-size: 21.5px;
+  letter-spacing: -.017em;
   white-space: nowrap;
 }
 
@@ -945,13 +945,13 @@ textarea.field__control {
 .pro-lockup {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: var(--warm-white);
   text-decoration: none;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 17.5px;
-  letter-spacing: -.016em;
+  font-size: 20.5px;
+  letter-spacing: -.017em;
   white-space: nowrap;
 }
 .pro-lockup:hover { color: var(--warm-white); }
@@ -1167,8 +1167,8 @@ h1 + .pro-prose { margin-top: 22px; }
   .trio > * { padding-inline: 0; }
 
   .lockup { gap: 10px; }
-  .lockup__name { font-size: 16px; }
-  .site-header .mark { width: 38px; height: 25px; }
+  .lockup__name { font-size: 17px; }
+  .site-header .mark { width: 42px; height: 28px; }
 }
 
 /* On the narrowest phones the wordmark shortens to "Kristina Dixon", as the
