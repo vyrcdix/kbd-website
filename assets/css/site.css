@@ -368,17 +368,21 @@ h2 + .quad { margin-top: 28px; }
 .lockup {
   display: inline-flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
   color: var(--charcoal);
   text-decoration: none;
 }
 .lockup__name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 21.5px;
-  letter-spacing: -.017em;
+  font-size: 15.5px;
+  line-height: 1.16;
+  letter-spacing: -.019em;
   white-space: nowrap;
 }
+/* The single-ring fallback mark ships in the markup but only shows on the
+   narrowest screens, where the two-ring overlap would muddy. */
+.lockup .mark--small { display: none; }
 
 .nav {
   display: flex;
@@ -904,7 +908,7 @@ textarea.field__control {
 .footer-lockup {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 9px;
   margin-bottom: 5px;
   color: var(--charcoal);
   text-decoration: none;
@@ -912,8 +916,9 @@ textarea.field__control {
 .footer-lockup__name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 16.5px;
-  letter-spacing: -.016em;
+  font-size: 12.5px;
+  line-height: 1.16;
+  letter-spacing: -.019em;
 }
 
 /* 16. Sticky message CTA — mobile only, and it is the CTA, not the nav
@@ -1166,14 +1171,13 @@ h1 + .pro-prose { margin-top: 22px; }
   .photo__caption { left: 12px; bottom: 12px; font-size: 10px; padding: 6px 9px; }
   .trio > * { padding-inline: 0; }
 
-  .lockup { gap: 10px; }
+  /* The mobile header does not stack and does not try to fit the overlapping
+     mark: single ring, "Kristina Dixon" on one line. The link's aria-label
+     still carries the full name. */
+  .lockup { gap: 9px; }
   .lockup__name { font-size: 17px; }
-  .site-header .mark { width: 42px; height: 28px; }
-}
-
-/* On the narrowest phones the wordmark shortens to "Kristina Dixon", as the
-   mobile design shows. The link's aria-label still carries the full name. */
-@media (max-width: 420px) {
+  .lockup .mark { display: none; }
+  .lockup .mark--small { display: block; }
   .lockup__tail { display: none; }
 }
 

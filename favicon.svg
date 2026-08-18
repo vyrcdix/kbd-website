@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 25" width="40" height="25" role="img" aria-label="Kristina Dixon Counselling">
-  <!-- Below 28px the doubled crayon line is dropped and the mark holds as two
-       plain circles: a child and an adult in the same space, neither contained
-       by the other. One colour, charcoal on warm white. -->
-  <rect width="40" height="25" fill="#FBF7F0"/>
-  <g fill="none" stroke="#33302B" stroke-width="3" stroke-linecap="round">
-    <circle cx="14" cy="12.5" r="9.4"/>
-    <circle cx="26" cy="12.5" r="9.4"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Kristina Dixon Counselling">
+  <!-- Below 20px the two-ring overlap muddies, so the mark falls back to the
+       single crayon ring: the same authored path as the lock-up, no translate.
+       One colour, charcoal on warm white. -->
+  <rect width="100" height="100" fill="#FBF7F0"/>
+  <path d="M50 9 Q68.4 5.7 81.8 18.2 Q91.6 32.8 93.5 50 Q95.3 68.8 78.3 78.3 Q66.8 90.7 50 94.5 Q32 93.4 20.3 79.7 Q7.9 67.4 5 50 Q5.2 31.4 20.7 20.7 Q33.1 9.3 53 8.2" fill="none" stroke="#33302B" stroke-width="7" stroke-linecap="round"/>
 </svg>
