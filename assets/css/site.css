@@ -140,12 +140,14 @@ a:hover { color: var(--link-hover); }
    the affordance must not be colour alone and #3A6480 measures 4.02:1 on
    yellow and 2.74:1 on sky — both short of AA. Charcoal is 9.4:1 and 5.7:1. */
 .block--yellow a,
-.block--sky a {
+.block--sky a,
+.form-panel a {
   color: var(--charcoal);
   text-decoration: underline;
 }
 .block--yellow a:hover,
-.block--sky a:hover { color: var(--charcoal); text-decoration-thickness: 2px; }
+.block--sky a:hover,
+.form-panel a:hover { color: var(--charcoal); text-decoration-thickness: 2px; }
 
 /* Focus is never removed. 2px at 2px offset, always ≥3:1 on its own ground. */
 :focus-visible {
@@ -1079,6 +1081,53 @@ h1 + .pro-prose { margin-top: 22px; }
 /* 18. Motion — feedback, not atmosphere
    -------------------------------------------------------------------------
    One quiet entrance, on the hero only. Nothing else moves on its own. */
+
+/* 18b. Copy-pass components — hero eyebrow, process steps, form panel note
+   ------------------------------------------------------------------------- */
+
+.hero__eyebrow {
+  margin: 0 0 16px;
+  max-width: 46em;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-quiet);
+}
+
+.steps {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  max-width: 640px;
+}
+.steps > li {
+  position: relative;
+  counter-increment: step;
+  padding: 14px 0 14px 46px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+.steps > li:last-child { border-bottom: 1px solid var(--rule); }
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 13px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1;
+  color: var(--charcoal);
+}
+.steps .step__lead { color: var(--charcoal); }
+.prose + .steps { margin-top: 20px; }
+.steps__after { margin-top: 18px; }
+
+.form-panel__note {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-quiet);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .hero__enter {

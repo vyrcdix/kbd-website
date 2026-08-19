@@ -35,7 +35,7 @@
 
     <nav class="nav" aria-label="Main">
       <a class="nav__link" href="play-therapy.html">For your child</a>
-      <a class="nav__link" href="for-parents.html">For you</a>
+      <a class="nav__link" href="for-parents.html">For parents</a>
       <a class="nav__link" href="about.html">About Kristina</a>
       <a class="nav__link" href="fees.html">Fees &amp; funding</a>
       <a class="nav__link" href="for-counsellors.html">Supervision</a>
@@ -48,7 +48,7 @@
         <nav class="menu-sheet" aria-label="Menu">
           <div class="wrap menu-sheet__list">
             <a href="play-therapy.html">For your child</a>
-            <a href="for-parents.html">For you</a>
+            <a href="for-parents.html">For parents</a>
             <a href="about.html">About Kristina</a>
             <a href="fees.html">Fees &amp; funding</a>
             <a href="for-counsellors.html">Clinical Supervision &amp; Consultation</a>
@@ -83,12 +83,13 @@
         <svg class="shape shape--form" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 9 Q68.4 5.7 81.8 18.2 Q91.6 32.8 93.5 50 Q95.3 68.8 78.3 78.3 Q66.8 90.7 50 94.5 Q32 93.4 20.3 79.7 Q7.9 67.4 5 50 Q5.2 31.4 20.7 20.7 Q33.1 9.3 53 8.2 Z" fill="#E39684" opacity=".55"></path></svg>
 
         <h2 class="d d-23">Send me a message</h2>
+      <p class="form-panel__note">A name and a way to reach you are enough. Please don&rsquo;t include urgent or highly sensitive details here &mdash; we can talk about those after we connect.</p>
 
         <form class="form" name="message" method="POST" action="/api/contact" data-message-form>
           <p class="honeypot"><label>Leave this field empty if you are a person: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
           <div class="field">
-            <label class="field__label" for="field-name">Your name</label>
+            <label class="field__label" for="field-name">Your name (optional)</label>
             <input class="field__control" id="field-name" name="name" type="text" autocomplete="name">
           </div>
 
@@ -103,11 +104,13 @@
             <textarea class="field__control" id="field-note" name="note" rows="4"></textarea>
           </div>
 
-          <button class="form__submit" type="submit">Send</button>
+          <button class="form__submit" type="submit">Send message</button>
 
           <p class="form__error" role="alert" data-form-error></p>
 
           <p class="form__helper" id="form-helper">Three fields, one of them required. Nothing about funding, diagnosis, or history is asked before we&rsquo;ve spoken.</p>
+        <p class="form__helper">I usually reply within two business days, between sessions.</p>
+        <p class="form__helper">Your message is used only to respond to your enquiry &mdash; the <a href="privacy.html">privacy notice</a> explains how messages and contact details are handled.</p>
         </form>
       </div>
     </div>
@@ -152,10 +155,11 @@
     <nav class="footer-col" aria-label="Pages">
       <span class="footer-col__head">Pages</span>
       <a href="play-therapy.html">For your child</a>
-      <a href="for-parents.html">For you</a>
+      <a href="for-parents.html">For parents</a>
       <a href="about.html">About Kristina</a>
       <a href="fees.html">Fees &amp; funding</a>
       <a href="contact.html" aria-current="page">Contact</a>
+        <a href="privacy.html">Privacy</a>
     </nav>
     <nav class="footer-col" aria-label="Also here">
       <span class="footer-col__head">Also here</span>

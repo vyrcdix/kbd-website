@@ -20,7 +20,7 @@ const CHROME = process.env.CHROME_PATH
 const PAGES = [
   'index.html', 'about.html', 'play-therapy.html', 'for-parents.html',
   'fees.html', 'contact.html', 'for-counsellors.html', 'thanks.html',
-  'message-not-sent.html', '404.html',
+  'message-not-sent.html', '404.html', 'privacy.html',
 ];
 
 const WIDTHS = [1280, 390];

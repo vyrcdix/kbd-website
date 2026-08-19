@@ -28,4 +28,8 @@
     <loc>https://kristinadixon.ca/for-counsellors.html</loc>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://kristinadixon.ca/privacy.html</loc>
+    <priority>0.3</priority>
+  </url>
 </urlset>
