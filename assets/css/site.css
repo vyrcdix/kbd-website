@@ -1082,7 +1082,7 @@ h1 + .pro-prose { margin-top: 22px; }
    -------------------------------------------------------------------------
    One quiet entrance, on the hero only. Nothing else moves on its own. */
 
-/* 18b. Copy-pass components — hero eyebrow, process steps, form panel note
+/* 18b. Copy-pass components — hero eyebrow, ruled passage, form panel note
    ------------------------------------------------------------------------- */
 
 .hero__eyebrow {
@@ -1093,34 +1093,17 @@ h1 + .pro-prose { margin-top: 22px; }
   color: var(--ink-quiet);
 }
 
-.steps {
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: step;
-  max-width: 640px;
-}
-.steps > li {
-  position: relative;
-  counter-increment: step;
-  padding: 14px 0 14px 46px;
+/* What happens when you get in touch is prose, never a numbered sequence.
+   Therapy with a child does not run to a process, and numbering it promises an
+   order the work does not keep — so the passage is set off by a rule above and
+   below instead, which separates it without implying stages. */
+.prose--ruled {
+  margin-top: 20px;
+  padding-block: 18px;
   border-top: 1px solid var(--rule);
-  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
 }
-.steps > li:last-child { border-bottom: 1px solid var(--rule); }
-.steps > li::before {
-  content: counter(step);
-  position: absolute;
-  left: 0;
-  top: 13px;
-  font-family: var(--font-display);
-  font-size: 21px;
-  line-height: 1;
-  color: var(--charcoal);
-}
-.steps .step__lead { color: var(--charcoal); }
-.prose + .steps { margin-top: 20px; }
-.steps__after { margin-top: 18px; }
+.prose--ruled + .prose { margin-top: 18px; }
 
 .form-panel__note {
   margin: 10px 0 0;
