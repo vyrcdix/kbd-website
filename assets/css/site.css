@@ -890,6 +890,11 @@ textarea.field__control {
   color: var(--paper-soft);
   text-wrap: pretty;
 }
+/* The For you closer carries no headline, so its first line would otherwise
+   start a heading's worth of space below the block's own padding. Only the
+   orphan margin goes — the button keeps its gap, because the body paragraph
+   still sits above it. */
+.closer--no-title .closer__body { margin-top: 0; }
 .closer__actions {
   display: flex;
   flex-wrap: wrap;
