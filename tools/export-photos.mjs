@@ -51,6 +51,8 @@ const JOBS = [
      losing the crown reads better than losing the chin. */
   { name: 'og-portrait', src: '2.jpg', box: [0, 1000, 4000, 2100], widths: [1200], jpegOnly: true },
   { name: 'og-play-space', src: '3.jpg', box: [0, 114, 6000, 3150], widths: [1200], jpegOnly: true },
+  /* index.html's link preview: photo 1, the child's side. */
+  { name: 'og-home', src: '1.jpg', box: [0, 90, 4600, 2415], widths: [1200], jpegOnly: true },
 
   /* Directory listings: Jane, BCACC, BCPTA, Psychology Today, Google Business
      Profile. Not used on the site. Head and shoulders at the master's full

@@ -40,9 +40,9 @@ revisited, so run it with `--preview` first and look.
 | Master | Exports | Notes |
 |---|---|---|
 | `pics/6.jpg` | `hero-*` | A still rather than the video, standing in for shot 1: the child from behind holding up a puppet, Kristina smiling back across the table, the sand tray between them. A full-height 4:5 crop. |
-| `pics/1.jpg` | none | Shot 1, replaced as the home hero by `pics/6.jpg`. The master is 3:2, and at 4:5 it holds Kristina or the child, never both; the child's face also shows in profile. |
+| `pics/1.jpg` | `og-home-1200.jpg` | Shot 1, replaced as the home hero by `pics/6.jpg`: the master is 3:2, and at 4:5 it holds Kristina or the child, never both. Now the home page's link preview, cut from the child's side. The child's face shows in profile, so it needs the family's consent, and a link preview travels further than the page does. |
 | `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg`, `directory-portrait-1000.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. The directory square is head and shoulders at full width; the master has little room above the hair, so where a directory masks it to a circle, the top of the head sits close to the edge. |
-| `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html`; every other page with an og:image uses `og-portrait`. |
+| `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html` and `og-home` on `index.html`; every other page with an og:image uses `og-portrait`. |
 | `pics/5.jpg` | `parents-*` | Kristina with one parent seen from behind, rather than two parents. A 3:2 band from the top of a portrait-format master. |
 | `pics/4.jpg` | `sand-tray-*` | On `play-therapy.html` at 3:2, in a text-and-photo split like About's "Where we'd meet". The master is 5:4 landscape, so 3:2 keeps the whole width. |
 
