@@ -32,12 +32,14 @@ assets/css/site.css      The whole stylesheet
 assets/js/site.js        Form validation. Loaded only by contact.html
 assets/js/analytics.js   GA4 config and conversion events
 assets/fonts/*.woff2     Self-hosted: Apfel Grotezk 400, Instrument Sans 400/500
-assets/img/              Photography goes here — see PHOTOGRAPHY.md
+assets/img/              Web exports of the photographs — see PHOTOGRAPHY.md
+pics/                    Photo masters. Git-ignored: never deployed
 functions/api/contact.js Cloudflare Pages Function: the message form
 message-not-sent.html    Shown if a send fails, with the direct email address
 tools/check-shapes.mjs   Feeling-shape placement check
 tools/check-contrast.mjs WCAG contrast check on rendered text
 tools/contact.test.mjs   Tests the form Function against a stubbed Fastmail
+tools/export-photos.mjs  Crops pics/ into the assets/img/ exports
 _headers                 Security headers and cache policy
 _redirects               Old Wix paths
 ```
@@ -148,6 +150,6 @@ and cache policy; `_redirects` carries the old Wix paths.
 
 ## Before this goes live
 
-Every photograph is still a striped placeholder, and the phone number, email,
-address and fees are the design document's placeholders that need Kristina's
-confirmation. See `PHOTOGRAPHY.md` for the shot list and the swap procedure.
+The phone number, email, address and fees are the design document's
+placeholders that need Kristina's confirmation. Two shots are still to place,
+the sand tray and the intro video; see `PHOTOGRAPHY.md`.

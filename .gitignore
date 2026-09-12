@@ -7,6 +7,11 @@ package-lock.json
 .DS_Store
 Thumbs.db
 
+# Photo masters: full resolution, with camera EXIF. Cloudflare Pages serves the
+# repo root, so anything committed here would be published. The web exports
+# live in assets/img/; see PHOTOGRAPHY.md.
+pics/
+
 # Not part of the site
 design-doc/
 LAUNCH-CHECKLIST.md

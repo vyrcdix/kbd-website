@@ -1,7 +1,8 @@
 # Photography
 
-**Every image on the site is currently a striped placeholder. The site must not
-launch with them, and stock imagery is not a substitute.**
+**Stock imagery is not a substitute for anything on this list.** The five web
+slots are filled from the masters in `pics/`; shots 4 and 6 are still to place.
+*Current exports* below records how each master was cut.
 
 ## Direction
 
@@ -28,6 +29,21 @@ BCACC, BCPTA or Psychology Today sees the same person.
 
 Also needed, though not a photograph: a 1200×630 crop of shot 2 for
 `og:image` / `twitter:image` on every page.
+
+## Current exports
+
+Cut by `tools/export-photos.mjs`, which holds the crop box for each master.
+Replace a master and re-run it; a master with a different frame needs its box
+revisited, so run it with `--preview` first and look.
+
+| Master | Exports | Notes |
+|---|---|---|
+| `pics/1.jpg` | `hero-*` | The master is 3:2, and at 4:5 it cannot hold both Kristina and the child. The crop keeps Kristina and the puppets; the child, whose face is partly visible in profile, is outside it. A 4:5 frame of the two of them would need to be shot for it. |
+| `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. |
+| `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html`; every other page with an og:image uses `og-portrait`. |
+| `pics/5.jpg` | `parents-*` | Kristina with one parent seen from behind, rather than two parents. A 3:2 band from the top of a portrait-format master. |
+| `pics/4.jpg` | none yet | Held, per the shot list. The master is 5:4 landscape, so a 4:5 crop will lose the right-hand side. |
+| `pics/6.jpg` | none yet | A still rather than the video. Held; a candidate for the video poster. |
 
 ## Resolution and export
 
@@ -72,6 +88,11 @@ carry over to print — wall vinyl for the play room, stickers, the cover of an
 intake pack, a future sign — and none of that can be cut from a 1700px web
 export.
 
+The masters live in `pics/`, which is git-ignored and so never deployed:
+Cloudflare Pages serves the repo root, and a committed master would be
+published at full resolution with its EXIF. That also means git is not backing
+them up, so keep a copy somewhere else.
+
 ### File formats and budget
 
 AVIF and WebP with a JPEG fallback, sRGB, embedded colour profile. Rough
@@ -93,23 +114,12 @@ night, often on a rural connection.
 The office address is deliberately not published — `contact.html` says it is
 sent with the first booking — and a geotagged photograph of the play room
 publishes it anyway. This applies to the room and sand-tray shots in
-particular. Most export presets have a "strip metadata" option; use it, then
-spot-check one file with `exiftool`.
+particular. `tools/export-photos.mjs` strips everything except the sRGB colour
+profile; anything exported another way, spot-check with `exiftool`.
 
-## Swapping a placeholder in
+## Markup
 
-Each slot looks like this:
-
-```html
-<!-- PLACEHOLDER — replace with the real photograph and real alt text. -->
-<div class="photo photo--4x5">
-  <svg class="photo__stripes" aria-hidden="true" focusable="false">…</svg>
-  <span class="photo__caption">PHOTO — candid, child mid-play in the room, 4:5</span>
-</div>
-```
-
-Replace the whole inner content with a `<picture>`, keeping the wrapper and its
-ratio class:
+Each slot is a ratio wrapper around a `<picture>`:
 
 ```html
 <div class="photo photo--4x5">
@@ -134,11 +144,15 @@ exactly — over-fetching a little is cheaper than a soft image. For the narrowe
 
 Notes:
 
-- `.photo > img` is already `width:100%; height:100%; object-fit:cover`, so the
-  wrapper's ratio class governs the crop.
-- **The hero image on each page is the exception:** drop `loading="lazy"` and add
-  `<link rel="preload" as="image" href="…">` to that page's `<head>`. It is the
-  LCP element, and most enquiries arrive from a phone late at night.
+- The `<picture>` fills the wrapper and `.photo img` is `width:100%;
+  height:100%; object-fit:cover`, so the wrapper's ratio class governs the crop.
+- **The hero image on each page is the exception:** drop `loading="lazy"`, add
+  `fetchpriority="high"`, and preload the AVIF in that page's `<head>` with the
+  same `srcset` and `sizes`:
+  `<link rel="preload" as="image" type="image/avif" imagesrcset="…" imagesizes="…" fetchpriority="high">`.
+  A plain `href` preload of the JPEG would be a second download on top of the
+  AVIF the `<picture>` picks. It is the LCP element, and most enquiries arrive
+  from a phone late at night.
 - Always set `width` and `height` on the `<img>` so nothing shifts as it loads.
 - AVIF and WebP with a JPG fallback.
 
@@ -148,11 +162,3 @@ Real alt text on every photograph, never a filename and never "photo of
 Kristina". Describe what a person who cannot see it would need: what is in the
 frame and what it conveys. Decorative crayon shapes are `aria-hidden="true"` and
 take no alt text — that is already handled.
-
-## When the last placeholder is gone
-
-Delete the placeholder scaffolding, which will then be dead code:
-
-- the `<svg width="0" height="0">` stripe-pattern block near the top of
-  `index.html`, `about.html` and `for-parents.html`,
-- the `.photo__stripes` and `.photo__caption` rules in `assets/css/site.css`.

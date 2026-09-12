@@ -637,9 +637,9 @@ h2 + .quad { margin-top: 28px; }
 
 /* 10. Photography
    -------------------------------------------------------------------------
-   PLACEHOLDER — every one of these must be replaced with real photography and
-   real alt text before launch. See PHOTOGRAPHY.md for the shot list and the
-   two-line swap. Do not ship the striped fill. Do not substitute stock. */
+   Each slot's ratio class governs the crop; the <picture> inside fills it. The
+   ground colour shows only while the image loads. See PHOTOGRAPHY.md for the
+   shot list and the export sizes. Do not substitute stock. */
 
 .photo {
   position: relative;
@@ -647,7 +647,8 @@ h2 + .quad { margin-top: 28px; }
   background: var(--placeholder-ground);
   overflow: hidden;
 }
-.photo > img {
+.photo > picture { display: block; height: 100%; }
+.photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -660,24 +661,6 @@ h2 + .quad { margin-top: 28px; }
    held to a width that keeps the section from becoming one tall photograph. */
 .photo--inset { max-width: 420px; }
 
-.photo__stripes {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.photo__caption {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  max-width: calc(100% - 40px);
-  padding: 8px 11px;
-  background: rgba(251, 247, 240, .94);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.45;
-  color: rgba(51, 48, 43, .8);
-}
 .block--sky .photo { background: var(--warm-white); }
 
 /* 11. Feeling shapes
@@ -1222,7 +1205,6 @@ h1 + .pro-prose { margin-top: 22px; }
 }
 
 @media (max-width: 560px) {
-  .photo__caption { left: 12px; bottom: 12px; font-size: 10px; padding: 6px 9px; }
   .trio > * { padding-inline: 0; }
 
   /* The mobile header does not stack and does not try to fit the overlapping
