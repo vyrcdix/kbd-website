@@ -25,10 +25,11 @@ const MASTERS = path.join(SITE, 'pics');
 
 /* box is [left, top, width, height] in the master. */
 const JOBS = [
-  /* index.html hero. The master is 3:2 and cannot hold both Kristina and the
-     child at 4:5, so this keeps Kristina and the puppets and leaves the child,
-     whose face is partly visible, outside the frame. */
-  { name: 'hero', src: '1.jpg', box: [2800, 0, 3200, 4000], widths: [840, 1700] },
+  /* index.html hero: the child from behind with a puppet, Kristina smiling back.
+     Photo 1 was here first, but at 4:5 it holds Kristina or the child, never both.
+     This is the preloaded LCP image, so it runs a little leaner than the rest. */
+  { name: 'hero', src: '6.jpg', box: [2550, 0, 2702, 3378], widths: [840, 1700],
+    quality: { avif: 46 } },
 
   /* about.html hero at 840/1700; index.html "Hi, I'm Kristina" at 440/900.
      Hair and knit texture make this the heaviest frame, so it runs a little
@@ -42,6 +43,9 @@ const JOBS = [
   /* for-parents.html, "Reading first is fine too". A 3:2 band from the top of
      a portrait-format master. */
   { name: 'parents', src: '5.jpg', box: [0, 300, 2626, 1750], widths: [840, 1700] },
+
+  /* play-therapy.html, "It's quieter than it looks". */
+  { name: 'sand-tray', src: '4.jpg', box: [0, 300, 5002, 3335], widths: [840, 1700] },
 
   /* og:image. Brow to collarbone: a 1.9:1 band cannot hold the whole head, and
      losing the crown reads better than losing the chin. */

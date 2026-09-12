@@ -151,5 +151,5 @@ and cache policy; `_redirects` carries the old Wix paths.
 ## Before this goes live
 
 The phone number, email, address and fees are the design document's
-placeholders that need Kristina's confirmation. Two shots are still to place,
-the sand tray and the intro video; see `PHOTOGRAPHY.md`.
+placeholders that need Kristina's confirmation. The intro video is still to
+come; see `PHOTOGRAPHY.md`.

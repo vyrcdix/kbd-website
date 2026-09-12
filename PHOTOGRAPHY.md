@@ -1,8 +1,9 @@
 # Photography
 
-**Stock imagery is not a substitute for anything on this list.** The five web
-slots are filled from the masters in `pics/`; shots 4 and 6 are still to place.
-*Current exports* below records how each master was cut.
+**Stock imagery is not a substitute for anything on this list.** Every photo
+slot is filled from the masters in `pics/`; only the intro video (shot 6) is
+still to come. *Current exports* below records how each master was cut, and
+where a master ended up in a slot other than its shot-list one.
 
 ## Direction
 
@@ -23,7 +24,7 @@ BCACC, BCPTA or Psychology Today sees the same person.
 | 1 | Kristina in the play space, candid, child mid-play | 4:5 | `index.html` hero |
 | 2 | Kristina, primary portrait | 4:5 | `about.html` hero, `index.html` sky block, Jane, BCACC, BCPTA, Psychology Today, Google Business Profile |
 | 3 | The play space, wide — sand tray, art materials, floor space | 16:9 | `about.html`, "Where we'd meet" |
-| 4 | Sand tray with a child's hands | 4:5 | Not yet placed; hold for the play-therapy page or directories |
+| 4 | Sand tray with a child's hands | 4:5 | `play-therapy.html`, "It's quieter than it looks" (at 3:2) |
 | 5 | Two parents mid-conversation, candid | 3:2 | `for-parents.html`, "Reading first is fine too" |
 | 6 | Intro video, 60–90 seconds, Kristina explaining why she works this way | 16:9 | Not yet placed. Needs captions **and** a transcript |
 
@@ -38,12 +39,12 @@ revisited, so run it with `--preview` first and look.
 
 | Master | Exports | Notes |
 |---|---|---|
-| `pics/1.jpg` | `hero-*` | The master is 3:2, and at 4:5 it cannot hold both Kristina and the child. The crop keeps Kristina and the puppets; the child, whose face is partly visible in profile, is outside it. A 4:5 frame of the two of them would need to be shot for it. |
+| `pics/6.jpg` | `hero-*` | A still rather than the video, standing in for shot 1: the child from behind holding up a puppet, Kristina smiling back across the table, the sand tray between them. A full-height 4:5 crop. |
+| `pics/1.jpg` | none | Shot 1, replaced as the home hero by `pics/6.jpg`. The master is 3:2, and at 4:5 it holds Kristina or the child, never both; the child's face also shows in profile. |
 | `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. |
 | `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html`; every other page with an og:image uses `og-portrait`. |
 | `pics/5.jpg` | `parents-*` | Kristina with one parent seen from behind, rather than two parents. A 3:2 band from the top of a portrait-format master. |
-| `pics/4.jpg` | none yet | Held, per the shot list. The master is 5:4 landscape, so a 4:5 crop will lose the right-hand side. |
-| `pics/6.jpg` | none yet | A still rather than the video. Held; a candidate for the video poster. |
+| `pics/4.jpg` | `sand-tray-*` | On `play-therapy.html` at 3:2, in a text-and-photo split like About's "Where we'd meet". The master is 5:4 landscape, so 3:2 keeps the whole width. |
 
 ## Resolution and export
 
@@ -65,6 +66,7 @@ still under-deliver on a tablet.
 | Home "Hi, I'm Kristina", 4:5 | 420 × 525 | 440 × 550 | **900 × 1125** |
 | Play space, 16:9 | 821 × 462 | 840 × 473 | **1700 × 956** |
 | Two parents, 3:2 | 821 × 547 | 840 × 560 | **1700 × 1133** |
+| Child page sand tray, 3:2 | 821 × 547 | 840 × 560 | **1700 × 1133** |
 
 Two exports per shot, at 1× and 2×, wired through `srcset`. There is no 3×
 export: the only devices with that pixel density are phones, and a phone is
