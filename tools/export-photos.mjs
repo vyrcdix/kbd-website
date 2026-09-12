@@ -51,6 +51,12 @@ const JOBS = [
      losing the crown reads better than losing the chin. */
   { name: 'og-portrait', src: '2.jpg', box: [0, 1000, 4000, 2100], widths: [1200], jpegOnly: true },
   { name: 'og-play-space', src: '3.jpg', box: [0, 114, 6000, 3150], widths: [1200], jpegOnly: true },
+
+  /* Directory listings: Jane, BCACC, BCPTA, Psychology Today, Google Business
+     Profile. Not used on the site. Head and shoulders at the master's full
+     width; a higher JPEG quality, since every directory recompresses it. */
+  { name: 'directory-portrait', src: '2.jpg', box: [0, 0, 4000, 4000], widths: [1000],
+    jpegOnly: true, quality: { jpeg: 90 } },
 ];
 
 /* Tuned against the per-image budget in PHOTOGRAPHY.md. */

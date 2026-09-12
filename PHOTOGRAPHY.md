@@ -41,7 +41,7 @@ revisited, so run it with `--preview` first and look.
 |---|---|---|
 | `pics/6.jpg` | `hero-*` | A still rather than the video, standing in for shot 1: the child from behind holding up a puppet, Kristina smiling back across the table, the sand tray between them. A full-height 4:5 crop. |
 | `pics/1.jpg` | none | Shot 1, replaced as the home hero by `pics/6.jpg`. The master is 3:2, and at 4:5 it holds Kristina or the child, never both; the child's face also shows in profile. |
-| `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. |
+| `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg`, `directory-portrait-1000.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. The directory square is head and shoulders at full width; the master has little room above the hair, so where a directory masks it to a circle, the top of the head sits close to the edge. |
 | `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html`; every other page with an og:image uses `og-portrait`. |
 | `pics/5.jpg` | `parents-*` | Kristina with one parent seen from behind, rather than two parents. A 3:2 band from the top of a portrait-format master. |
 | `pics/4.jpg` | `sand-tray-*` | On `play-therapy.html` at 3:2, in a text-and-photo split like About's "Where we'd meet". The master is 5:4 landscape, so 3:2 keeps the whole width. |
@@ -78,7 +78,7 @@ Also needed:
 | Asset | Size | Notes |
 |---|---|---|
 | `og:image` | 1200 × 630 | Crop of the primary portrait. One per page, or one shared. |
-| Directory portrait | 1000 × 1000 | Square crop for Jane, BCACC, BCPTA, Psychology Today, Google Business Profile. Same portrait everywhere — that consistency is the point. |
+| Directory portrait | 1000 × 1000 | `assets/img/directory-portrait-1000.jpg`, cut from `pics/2.jpg`. Square crop for Jane, BCACC, BCPTA, Psychology Today, Google Business Profile. Same portrait everywhere — that consistency is the point. |
 | Intro video | 1920 × 1080 | MP4 (H.264) plus WebM. Captions and a transcript are required. |
 | Video poster | 1700 × 956 | A still from the video, same treatment as the photographs. |
 
