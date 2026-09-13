@@ -37,15 +37,19 @@ const JOBS = [
   { name: 'portrait', src: '2.jpg', box: [6, 0, 3989, 4986], widths: [440, 840, 900, 1700],
     quality: { avif: 40, webp: 62 } },
 
-  /* about.html, "Where we'd meet". */
-  { name: 'play-space', src: '3.jpg', box: [0, 1, 6000, 3375], widths: [840, 1700] },
+  /* about.html, "Where we'd meet": the sand tray, close, beside copy that names
+     it. Photo 3 was here first; it now survives only as og-play-space. The top
+     of this band keeps the child's hands and the octopus whole. */
+  { name: 'play-space', src: '4.jpg', box: [0, 300, 5002, 2814], widths: [840, 1700] },
 
   /* for-parents.html, "Reading first is fine too". A 3:2 band from the top of
      a portrait-format master. */
   { name: 'parents', src: '5.jpg', box: [0, 300, 2626, 1750], widths: [840, 1700] },
 
-  /* play-therapy.html, "It's quieter than it looks". */
-  { name: 'sand-tray', src: '4.jpg', box: [0, 300, 5002, 3335], widths: [840, 1700] },
+  /* play-therapy.html, "It's quieter than it looks", beside "Your child leads,
+     and I follow": the child building a scene in the sand tray, Kristina
+     watching. A 3:2 band from a 5:4 master; only blank wall and floor go. */
+  { name: 'child-leads', src: 'DSCF2943-REP.jpg', box: [0, 100, 5002, 3335], widths: [840, 1700] },
 
   /* og:image. Brow to collarbone: a 1.9:1 band cannot hold the whole head, and
      losing the crown reads better than losing the chin. */

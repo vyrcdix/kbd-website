@@ -24,7 +24,7 @@ BCACC, BCPTA or Psychology Today sees the same person.
 | 1 | Kristina in the play space, candid, child mid-play | 4:5 | `index.html` hero |
 | 2 | Kristina, primary portrait | 4:5 | `about.html` hero, `index.html` sky block, Jane, BCACC, BCPTA, Psychology Today, Google Business Profile |
 | 3 | The play space, wide — sand tray, art materials, floor space | 16:9 | `about.html`, "Where we'd meet" |
-| 4 | Sand tray with a child's hands | 4:5 | `play-therapy.html`, "It's quieter than it looks" (at 3:2) |
+| 4 | Sand tray with a child's hands | 4:5 | `about.html`, "Where we'd meet" (at 16:9), in place of shot 3 |
 | 5 | Two parents mid-conversation, candid | 3:2 | `for-parents.html`, "Reading first is fine too" |
 | 6 | Intro video, 60–90 seconds, Kristina explaining why she works this way | 16:9 | Not yet placed. Needs captions **and** a transcript |
 
@@ -42,9 +42,10 @@ revisited, so run it with `--preview` first and look.
 | `pics/6.jpg` | `hero-*` | A still rather than the video, standing in for shot 1: the child from behind holding up a puppet, Kristina smiling back across the table, the sand tray between them. A full-height 4:5 crop. |
 | `pics/1.jpg` | `og-home-1200.jpg` | Shot 1, replaced as the home hero by `pics/6.jpg`: the master is 3:2, and at 4:5 it holds Kristina or the child, never both. Now the home page's link preview, cut from the child's side. The child's face shows in profile, so it needs the family's consent, and a link preview travels further than the page does. |
 | `pics/2.jpg` | `portrait-*`, `og-portrait-1200.jpg`, `directory-portrait-1000.jpg` | 4:5 near full frame. The og crop runs brow to collarbone: a 1.9:1 band cannot hold the whole head. The directory square is head and shoulders at full width; the master has little room above the hair, so where a directory masks it to a circle, the top of the head sits close to the edge. |
-| `pics/3.jpg` | `play-space-*`, `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for. `og-play-space` is on `play-therapy.html` and `og-home` on `index.html`; every other page with an og:image uses `og-portrait`. |
+| `pics/3.jpg` | `og-play-space-1200.jpg` | Kristina at the table with the sand tray and shelves behind, rather than the empty wide room the shot list asks for, so `pics/4.jpg` replaced it in About's "Where we'd meet". It is now only `play-therapy.html`'s link preview. `og-home` is on `index.html`; every other page with an og:image uses `og-portrait`. |
 | `pics/5.jpg` | `parents-*` | Kristina with one parent seen from behind, rather than two parents. A 3:2 band from the top of a portrait-format master. |
-| `pics/4.jpg` | `sand-tray-*` | On `play-therapy.html` at 3:2, in a text-and-photo split like About's "Where we'd meet". The master is 5:4 landscape, so 3:2 keeps the whole width. |
+| `pics/4.jpg` | `play-space-*` | About's "Where we'd meet" at 16:9, beside copy that names the sand tray. It was on the child page first, until `pics/DSCF2943-REP.jpg` took that slot. |
+| `pics/DSCF2943-REP.jpg` | `child-leads-*` | Not on the shot list. Kristina laughing with her hands folded, watching, as the child builds a scene in the sand tray: the same session as `pics/4.jpg`, but showing the relationship rather than the hands. On `play-therapy.html` beside "Your child leads, and I follow." The master is 5:4 landscape; the 3:2 band loses only blank wall and floor. The child is seen from behind. |
 
 ## Resolution and export
 
@@ -66,7 +67,7 @@ still under-deliver on a tablet.
 | Home "Hi, I'm Kristina", 4:5 | 420 × 525 | 440 × 550 | **900 × 1125** |
 | Play space, 16:9 | 821 × 462 | 840 × 473 | **1700 × 956** |
 | Two parents, 3:2 | 821 × 547 | 840 × 560 | **1700 × 1133** |
-| Child page sand tray, 3:2 | 821 × 547 | 840 × 560 | **1700 × 1133** |
+| Child page, 3:2 | 821 × 547 | 840 × 560 | **1700 × 1133** |
 
 Two exports per shot, at 1× and 2×, wired through `srcset`. There is no 3×
 export: the only devices with that pixel density are phones, and a phone is
